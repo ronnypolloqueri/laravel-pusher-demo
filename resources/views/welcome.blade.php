@@ -12,5 +12,11 @@
     </head>
     <body>
         <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            window.Echo.channel('canal')
+                .listen('EventSocket', (e) => {
+                    console.log(e);
+                });
+        </script>
     </body>
 </html>
