@@ -14,17 +14,17 @@ class EventSocket implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $name;
-    public $foo = "bar";
+    public $task;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($task)
     {
-        $this->name = $name;
+        $this->task = $task;
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**

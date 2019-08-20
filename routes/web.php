@@ -19,3 +19,18 @@ Route::get('/', function () {
 Route::get('/pusher', function () {
     \App\Events\EventSocket::dispatch("Ronny");
 });
+
+use App\Task;
+
+Route::get('/tasks', function(){
+	return Task::all()->pluck('name');
+});
+
+
+Route::post('/task', function(){
+	$task = Task::create(request()->all());
+
+	App\Events\EventSocket::dispatch($task);
+
+	return $task;
+});
