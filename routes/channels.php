@@ -14,3 +14,10 @@
 Broadcast::channel('notificacion.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('room.{id}', function ($user, $id) {
+    if( $user->canJoinRoom($id) ){
+    	return ["id" => $user->id, "name" => $user->name];
+    }
+});
+

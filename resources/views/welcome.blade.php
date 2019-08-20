@@ -19,9 +19,9 @@
     <body>
         <div id="app">
         <div class="text-center">
-            <h2>{{ Auth::user()->name }}</h2>
+            <h2>Sala {{ $id }}</h2>
         </div>
-            <example-component></example-component>   
+            <example-component room="{{ $id }}"></example-component>   
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>

@@ -1,8 +1,11 @@
 <template>
     <div class="container">
-        <div class="text-center">
-            <h2>{{ Auth::user()->name }}</h2>
-        </div>
+
+        <h4>Usuarios conectados: </h4>
+        <ul class="text-center">
+            <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+        </ul>
+
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <input v-model="task" class="form-control" type="text">
@@ -24,17 +27,37 @@
         data() {
             return {
                 task: '',
-                tasks: []
+                tasks: [],
+                users: []
             }
         },
+
+        props: ["room"],
 
         created() {
             this.fillTask();
             console.log("created");
 
-            window.Echo.channel('canal')
-                .listen('EventSocket', (e) => {
-                    this.tasks.push(e.task.name);
+            // window.Echo.channel('canal')
+            //     .listen('EventSocket', (e) => {
+            //         this.tasks.push(e.task.name);
+            //     })
+
+
+            window.Echo.join('room.' + this.room)
+                .here((users) => {
+                    this.users = users;
+                    console.log(users);
+                })                    
+                .joining((user) => {
+                    this.users.push(user)
+                    console.log("Se unió a la sala")
+                    console.log(user);
+                })
+                .leaving((user) => {
+                    this.users.splice(this.users.indexOf(user), 1);
+                    console.log("Abandonó la sala")
+                    console.log(user);
                 })
         },
 

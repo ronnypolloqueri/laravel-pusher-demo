@@ -21,6 +21,10 @@ class HomeController extends Controller
     public function notify(User $user){
         Notificacion::dispatch($user);
     }
+
+    public function room($id){
+        return view('welcome', compact('id'));
+    }
     /**
      * Show the application dashboard.
      *

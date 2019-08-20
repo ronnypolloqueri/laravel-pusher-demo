@@ -21,6 +21,7 @@ Route::get('/pusher', function () {
 });
 
 Route::get('/notify/{user}', 'HomeController@notify');
+Route::get('/room/{user}', 'HomeController@room');
 
 use App\Task;
 
