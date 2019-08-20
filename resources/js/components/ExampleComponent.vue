@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div class="text-center">
+            <h2>{{ Auth::user()->name }}</h2>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <input v-model="task" class="form-control" type="text">

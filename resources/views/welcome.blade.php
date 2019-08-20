@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
@@ -17,14 +18,17 @@
     </head>
     <body>
         <div id="app">
+        <div class="text-center">
+            <h2>{{ Auth::user()->name }}</h2>
+        </div>
             <example-component></example-component>   
         </div>
+
         <script src="{{ asset('js/app.js') }}"></script>
         <script>
-            window.Echo.channel('canal')
-                .listen('EventSocket', (e) => {
-                    console.log("Lo escuche: ");
-                    console.log(e);
+            window.Echo.private('notificacion.' + {{ Auth::user()->id }})
+                .listen('Notificacion', (e) => {
+                    alert(e.message);
                 });
         </script>
     </body>

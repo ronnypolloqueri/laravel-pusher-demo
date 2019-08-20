@@ -20,6 +20,8 @@ Route::get('/pusher', function () {
     \App\Events\EventSocket::dispatch("Ronny");
 });
 
+Route::get('/notify/{user}', 'HomeController@notify');
+
 use App\Task;
 
 Route::get('/tasks', function(){
@@ -34,3 +36,6 @@ Route::post('/task', function(){
 
 	return $task;
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
